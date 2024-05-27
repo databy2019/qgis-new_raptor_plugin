@@ -30,6 +30,7 @@ from qgis.core import QgsProject, QgsFeature, QgsGeometry, QgsPoint
 from .resources import *
 # Import the code for the dialog
 from .new_raptor_dialog import NewRaptorDialog
+from .impact_table import DlgTable
 import os.path
 
 
@@ -228,6 +229,7 @@ class NewRaptor:
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
+            #Code exceute when button Ok clicked
 
             #take the last ID
             lyrNests = QgsProject.instance().mapLayersByName("Raptor Nests")[0]
@@ -267,6 +269,10 @@ class NewRaptor:
             ftrNests.setGeometry(buffer)
             pr.addFeatures([ftrNests])
             lyrBuffer.reload()
+
+            dlgTable = DlgTable()
+            dlgTable.show()
+            dlgTable.exec_()
             
         else:
             QMessageBox.information(self.dlg, "Message", "Should run every cancel button clicked")
